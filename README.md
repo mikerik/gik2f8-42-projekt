@@ -1,2 +1,1 @@
-# gik2f8-42-projekt
-GIK2F8 - Projektarbete
+# GIK2F8 - Projektarbete - Grupp 42
