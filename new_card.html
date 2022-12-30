@@ -1,81 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Create-A-Player</title>
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
-    <link rel="stylesheet" href="new_card.css">
-</head>
+    <link rel="stylesheet" href="new_card.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
 
-<body>
-    <!-- <main id="root">
-        <h1>Create-A-Player</h1>
-        <section>
+  <body>
+    <main id="root">
+      <section class="grid grid-cols-2 border-[0.5rem] border-green-400 gap-1">
+        <section class="bg-red-100 border-[0.25rem] border-pink-300">
+          <h2>Lägg till en uppgift</h2>
+          <form id="todoForm" name="todoForm">
             <section>
-                <h2>Lägg till en uppgift</h2>
-                <form id="todoForm" name="todoForm">
-                    <section>
-                        <label for="title">Name</label>
-                        <p class="message text-sm text-red-700 mb-2 hidden">
-                            Error message
-                        </p>
-                        <input type="text" id="title" name="title">
-                    </section>
-                    <section>
-                        <label for="description">Beskrivning</label>
-                        <p class="message text-sm text-red-700 mb-2 hidden">
-                            Error message
-                        </p>
-                        <textarea maxlength="500" rows="5" id="description" name="description"
-                            class="resize-none"></textarea>
-                    </section>
-                    <section>
-                        <label for="title">Utförd senast</label>
-                        <p class="message text-sm text-red-700 mb-2 hidden">
-                            Error message
-                        </p>
-                        <input type="date" id="dueDate" name="dueDate">
-                    </section>
-                    <button name="submitTodoForm" type="submit">
-                        Spara
-                    </button>
-                </form>
-            </section> -->
-    <!-- <section>
-        <h2>Alla spelare</h2> -->
+              <label for="title">Name</label>
+              <p class="message text-sm text-red-700 mb-2 hidden">Error message</p>
+              <input type="text" id="title" name="title" />
+            </section>
+            <section>
+              <label for="description">Beskrivning</label>
+              <p class="message text-sm text-red-700 mb-2 hidden">Error message</p>
+              <textarea maxlength="500" rows="5" id="description" name="description" class="resize-none"></textarea>
+            </section>
+            <section>
+              <label for="title">Utförd senast</label>
+              <p class="message text-sm text-red-700 mb-2 hidden">Error message</p>
+              <input type="date" id="dueDate" name="dueDate" />
+            </section>
+            <button name="submitTodoForm" type="submit">Spara</button>
+          </form>
+        </section>
+        <section class="bg-green-100 playerlist border-[0.25rem] border-pink-300 grid grid-cols-4 place-content-evenly place-items-center">
+          <div class="pid">
+            1
+            <div class="card">
+              <div class="card__content">
+                <img src="gifs/1.gif" alt="" class="gif" />
+                <h2 class="card__title">Mikael Eriksson</h2>
+                <p class="card__body">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet blanditiis alias, eligendi nesciunt a ratione cupiditate placeat.
+                </p>
+                <a href="#" class="card__button">Delete this card</a>
+              </div>
+            </div>
+          </div>
 
-    <div class="card">
-        <div class="card__content">
+          <div class="card">
+            <div class="card__content">
+              <h2 class="card__title">Jeanette Bergström</h2>
+              <img src="gifs/2.gif" alt="" class="gif" />
+              <p class="card__body">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet blanditiis alias, eligendi nesciunt a ratione cupiditate placeat.
+              </p>
+              <a href="#" class="card__button">Delete this card</a>
+            </div>
+          </div>
 
-            <h2 class="card__title">Mikael Eriksson</h2>
-            <img src="gifs/5.gif" alt="" class="gif">
-            <p class="card__body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
-                blanditiis alias, eligendi nesciunt a ratione cupiditate placeat.</p>
-            <a href="#" class="card__button">Delete this card</a>
-        </div>
+          <div class="card">
+            <div class="card__content">
+              <h2 class="card__title">Anders Andersson</h2>
+              <img src="gifs/3.gif" alt="" class="gif" />
+              <p class="card__body">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet blanditiis alias, eligendi nesciunt a ratione cupiditate placeat.
+              </p>
+              <a href="#" class="card__button">Delete this card</a>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card__content">
+              <h2 class="card__title">Mikael Eriksson</h2>
+              <img src="gifs/4.gif" alt="" class="gif" />
+              <p class="card__body">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet blanditiis alias, eligendi nesciunt a ratione cupiditate placeat.
+              </p>
+              <a href="#" class="card__button">Delete this card</a>
+            </div>
+          </div>
 
-    </div>
+          <div class="card">
+            <div class="card__content">
+              <h2 class="card__title">Jeanette Bergström</h2>
+              <img src="gifs/5.gif" alt="" class="gif" />
+              <p class="card__body">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet blanditiis alias, eligendi nesciunt a ratione cupiditate placeat.
+              </p>
+              <a href="#" class="card__button">Delete this card</a>
+            </div>
+          </div>
 
-    <!-- <div class="card">
-                    <h2 class="card__title">Jeanette Bergström</h2>
-                    <p class="card__body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
-                        blanditiis alias, eligendi nesciunt a ratione cupiditate placeat.</p>
-                    <a href="#" class="card__button">Delete this card</a>
-                </div>
-
-                <div class="card">
-                    <h2 class="card__title">Anders Andersson</h2>
-                    <p class="card__body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
-                        blanditiis alias, eligendi nesciunt a ratione cupiditate placeat.</p>
-                    <a href="#" class="card__button">Delete this card</a>
-                </div> -->
-
-    <!-- </section>
-    </section>
-    </main> -->
-</body>
-
+          <!-- <div class="card">
+            <div class="card__content">
+              <h2 class="card__title">Anders Andersson</h2>
+              <img src="gifs/6.gif" alt="" class="gif" />
+              <p class="card__body">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet blanditiis alias, eligendi nesciunt a ratione cupiditate placeat.
+              </p>
+              <a href="#" class="card__button">Delete this card</a>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card__content">
+              <h2 class="card__title">Anders Andersson</h2>
+              <img src="gifs/7.gif" alt="" class="gif" />
+              <p class="card__body">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet blanditiis alias, eligendi nesciunt a ratione cupiditate placeat.
+              </p>
+              <a href="#" class="card__button">Delete this card</a>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card__content">
+              <h2 class="card__title">Anders Andersson</h2>
+              <img src="gifs/8.gif" alt="" class="gif" />
+              <p class="card__body">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet blanditiis alias, eligendi nesciunt a ratione cupiditate placeat.
+              </p>
+              <a href="#" class="card__button">Delete this card</a>
+            </div>
+          </div> -->
+        </section>
+      </section>
+    </main>
+  </body>
 </html>
