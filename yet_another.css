@@ -9,67 +9,36 @@ body {
     padding: 0;
     font-family: 'Roboto', sans-serif;
     background: hsl(0, 10%, 20%);
-}
-
-.card-container {
-    position: relative;
-}
-
-.card {
-    width: 35ch;
-    height: 60ch;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    border-radius: 0.5rem;
-    overflow: hidden;
-    box-shadow: hsla(0, 0%, 0%, 0.5) -5px -5px 10px 0px;
     display: flex;
     place-content: center;
     place-items: center;
-    cursor: pointer;
 }
 
-.card__bg {
+.card-container {
+    height: 100vh;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    position: relative;
+    border: 2px solid hsl(0, 0%, 0%);
+    top: 0;
+    left: 0;
 }
 
-.card:nth-child(2) {
-    z-index: 2;
-    top: 0.75rem;
-    left: 0.75rem;
-}
-
-.card:nth-child(3) {
-    z-index: 3;
-    top: 1.5rem;
-    left: 1.5rem;
-}
-
-.card:nth-child(4) {
-    z-index: 4;
-    top: 2.25rem;
-    left: 2.25rem;
-}
-
-/* Add additional styles for additional cards here */
-
-.card.selected {
-    transform: translateX(95%);
-    transition: transform 500ms ease-in-out;
-}
-
-.card.putback {
-    transform: translateX(0);
-    transition: transform 500ms ease-in-out;
+.card {
+    width: 6.4cm;
+    height: 8.9cm;
+    overflow: hidden;
+    box-shadow: hsla(0, 0%, 0%, 0.5) -5px -5px 10px 0px;
+    cursor: pointer;
+    position: absolute;
+    background-image: url(img/bg.jpg);
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+    place-items: center;
 }
 
 .player-face {
-    position: absolute;
-    top: 2rem;
     width: 85%;
     border-radius: 0.5rem;
     box-shadow: hsla(0, 0%, 0%, 0.5) 4px 4px 8px 0px;
