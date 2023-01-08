@@ -1,35 +1,28 @@
 const cards = document.querySelectorAll('.card');
 
-// loop through each element in the cards array
-for (let index = 0; index < cards.length; index++) {
-  // get the current card element
-  const card = cards[index];
-  // add the current index value to the card's current left position
-  card.style.left = `${50 + index}%`;
-  // add the current index value to the card's current top position
-  card.style.top = `${50 + index}%`;
-  // set the card's z-index to the current index value
-  card.style.zIndex = `${index}`;
-  // set the card's transform to translate(-50%, -50%) and scale(0.9)
-  card.style.transform = 'translate(-50%, -50%) scale(0.9)';
-  // set the card's transition to all 0.5s ease-in-out
+for (let i = 0; i < cards.length; i++) {
+  const card = cards[i];
+  card.style.left = `${i + 10}px`;
+  card.style.top = `${i + 10}px`;
+  card.style.zIndex = `${i}`;
+  card.style.transform = 'scale(0.9)';
   card.style.transition = 'all 0.5s ease-in-out, z-index 0s';
 }
 
 cards.forEach((card) => {
   card.addEventListener('mouseover', () => {
     if (card.classList.contains('selected')) {
-      card.style.transform = 'translate(-50%, -50%) scale(1.05) rotate(5deg)';
+      card.style.transform = 'scale(1.05)';
     } else {
-      card.style.transform = 'translate(-60%, -50%) scale(1) rotate(-10deg)';
+      card.style.transform = 'translate(-50px, 0) scale(1) rotate(-5deg)';
     }
   });
 
   card.addEventListener('mouseout', () => {
     if (card.classList.contains('selected')) {
-      card.style.transform = 'translate(-50%, -50%)';
+      card.style.transform = 'translate(-3px, 0)';
     } else {
-      card.style.transform = 'translate(-50%, -50%) scale(0.9)';
+      card.style.transform = 'translate(0, 0) scale(0.9)';
     }
   });
 
@@ -58,8 +51,7 @@ cards.forEach((card) => {
         break;
       default:
         card.style.zIndex = `${highestZIndex + 1}`;
-        card.style.transform = 'translate(-50%, -50%)';
-        card.style.left = `${currentLeft + 300}` + 'px';
+        card.style.left = `${320 + highestZIndex}px`;
         card.classList.add('selected');
         console.log('Left position: ' + card.style.left);
         console.log('Top position: ' + card.style.top);
