@@ -6,15 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="shortcut icon" href="data:image/x-icon;" type="image/x-icon" />
-    <title>Character Creator</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>Hockeykortsgenerator</title>
   </head>
 
   <body>
     <main id="root" class="pt-24 bg-gradient-to-br from-white to-black min-h-screen">
-      <h1 class="text-center mb-10 text-7xl text-black">Skapa ett hockeykort</h1>
+      <h1 class="text-center mb-10 text-7xl text-black">Hockeykortsgenerator</h1>
       <section class="flex gap-10 w-full xl:w-4/5 mx-2 xl:mx-auto p-5">
         <section class="flex-2 bg-green-400 bg-opacity-25 p-5 rounded-xl shadow-lg">
-          <h2 class="mb-6 text-3xl text-black">Uppgifter på hockeykortet!!!</h2>
+          <h2 class="mb-6 text-3xl text-black">Skapa nytt spelarkort</h2>
           <form id="playerCardForm" name="playerCardForm">
             <section class="mb-2">
               <label class="block pr-5 mb-2 text-xl" for="name">Spelarens namn</label>
@@ -37,8 +38,8 @@
               <label class="block pr-5 mb-2 text-xl" for="name">Spelarens lag</label>
               <p class="message text-sm text-red-700 mb-2 hidden">Error message</p>
               <select id="playerTeam" name="playerTeam" class="w-full border-black border-[0.25rem] focus-within:outline-none focus:border-gray-600 px-4 py-2">
-                <option value="Systemvetenskapliga programmet">Systemvetenskapliga programmet</option>
-                <option value="IT-säkerhet och mjukvarutestning">IT-säkerhet och mjukvarutestning</option>
+                <option value="Systemvetenskap">Systemvetenskapliga programmet</option>
+                <option value="IT-säkerhet">IT-säkerhet och mjukvarutestning</option>
                 <option value="Informationsdesign">Informationsdesign</option>
               </select>
             </section>

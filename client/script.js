@@ -8,19 +8,16 @@ playerCardForm.addEventListener('submit', onSubmit);
 
 const hockeyCardsElement = document.getElementById('hockeyCards');
 
-const wrapper = `
-    <div class="pile left-pile"></div>
-    <div class="pile right-pile"></div>
-`;
+// const wrapper = `
+//     <div class="pile left-pile"></div>
+//     <div class="pile right-pile"></div>
+// `;
 
-console.log('what is this' + hockeyCardsElement);
-
-hockeyCardsElement.innerHTML += wrapper
+// hockeyCardsElement.innerHTML += wrapper
 
 let nameValid = true;
 let jerseynumberValid = true;
 let playerTeamValid = true;
-
 
 const api = new Api('http://localhost:5678/playerCards');
 
@@ -79,7 +76,6 @@ function saveCard() {
     name: playerCardForm.name.value,
     jerseynumber: playerCardForm.jerseynumber.value,
     playerTeam: playerCardForm.playerTeam.value,
-    viewed: false,
   };
   api.create(playerCard).then((playerCard) => {
     if (playerCard) {
@@ -88,17 +84,23 @@ function saveCard() {
   });
 }
 
-
-
 renderList = async () => {
   console.log('rendering');
   try {
     const playerCards = await api.getAll();
     hockeyCardsElement.innerHTML = '';
     if (playerCards && playerCards.length > 0) {
+      const leftPile = document.createElement('div');
+      leftPile.classList.add('pile', 'left-pile');
+      leftPile.id = 'leftPile';
+      hockeyCardsElement.appendChild(leftPile);
       playerCards.forEach((playerCard) => {
-        hockeyCardsElement.insertAdjacentHTML('beforeend', renderplayerCard(playerCard));
+        leftPile.insertAdjacentHTML('beforeend', renderplayerCard(playerCard));
       });
+      const rightPile = document.createElement('div');
+      rightPile.classList.add('pile', 'right-pile');
+      rightPile.id = 'rightPile';
+      hockeyCardsElement.appendChild(rightPile);
     }
   } catch (err) {
     return err;
@@ -106,27 +108,62 @@ renderList = async () => {
 };
 
 function renderplayerCard({ id, name, jerseynumber, playerTeam }) {
+  let imgSrc;
+  if (jerseynumber >= 12.25 && jerseynumber <= 24.5) {
+    imgSrc = '2';
+  } else if (jerseynumber >= 24.5 && jerseynumber <= 36.75) {
+    imgSrc = '3';
+  } else if (jerseynumber >= 36.75 && jerseynumber <= 49) {
+    imgSrc = '4';
+  } else if (jerseynumber >= 49 && jerseynumber <= 61.25) {
+    imgSrc = '5';
+  } else if (jerseynumber >= 61.25 && jerseynumber <= 73.5) {
+    imgSrc = '6';
+  } else if (jerseynumber >= 73.5 && jerseynumber <= 85.75) {
+    imgSrc = '7';
+  } else if (jerseynumber >= 85.75 && jerseynumber <= 99) {
+    imgSrc = '8';
+  } else {
+    imgSrc = '1';
+  }
+
+  let teamBgColor;
+  if (playerTeam === 'Systemvetenskap') {
+    teamBgColor = 'hsla(250, 50%, 50%, 0.75)';
+  } else if (playerTeam === 'Informationsdesign') {
+    teamBgColor = 'hsla(0, 50%, 50%, 0.75)';
+  } else {
+    teamBgColor = 'hsla(50, 50%, 50%, 0.75)';
+  }
+
   let html = `
       <div class="card" style="
         top: ${id * 10}px;
-        left: ${id * 10}px;
-        background-color: rgb(${id + 10 * 2}0, ${id + 5 * 3}0, ${id + 5 * 4}0">
-      <div class="card-number">${jerseynumber}</div>
-        <div class="card-img">
-          <img src="./gifs/3.gif" alt="card" />
-          <h2>${name}</h2>
-          <p>${playerTeam}</p>
-        </div>       
+        left: ${id * 10}px;">
+        <span class="card-name" style="background: ${teamBgColor};">${name}</span>
+        <span class="card-number">${jerseynumber}</span>
+        <span class="card-team" style="background: ${teamBgColor};">${playerTeam}</span>
+          <img src="./gifs/${imgSrc}.gif" alt="card" />
+          <button onclick="deleteplayerCard(${id})" class="w-fit bg-gray-300 hover:bg-gray-400 hover:translate-y-px px-4 py-2 rounded-lg shadow-md">Radera kortet!</button> 
     </div>`;
-  jerseynumber &&
-    (html += `
-      <p class="ml-8 mt-2 text-md italic">${jerseynumber}</p>
-  `);
+
   return html;
 }
 
+deleteplayerCard = async (id) => {
+  try {
+    await api.remove(id);
+    renderList();
+  } catch (err) {
+    return err;
+  }
+};
+
+renderList();
+
 document.addEventListener('click', (event) => {
   const target = event.target;
+  console.log('Was the card div clicked? ' + target.classList.contains('card'));
   if (target.classList.contains('card')) {
     const card = target;
     const pile = card.parentElement;
@@ -154,34 +191,3 @@ document.addEventListener('click', (event) => {
     }
   }
 });
-
-deleteplayerCard = async (id) => {
-  try {
-    await api.remove(id);
-    renderList();
-  } catch (err) {
-    return err;
-  }
-};
-
-updateplayerCard = async (id) => {
-  const checkBox = document.getElementById(`checkBox${id}`);
-  let data;
-  if (checkBox.checked) {
-    data = {
-      viewed: true,
-    };
-  } else {
-    data = {
-      viewed: false,
-    };
-  }
-  try {
-    await api.update(id, data);
-    renderList();
-  } catch (err) {
-    return err;
-  }
-};
-
-renderList();

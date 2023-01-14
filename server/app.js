@@ -63,11 +63,11 @@ app.delete("/playerCards/:id", async (req, res) => {
         JSON.stringify(currentplayerCards.filter((playerCard) => playerCard.id != id))
       );
       res.send({
-        message: `Uppgift med id ${id} togs bort`,
+        message: `Kortet med id ${id} raderades`,
       });
     } else {
       res.status(404).send({
-        error: "Ingen uppgift att ta bort",
+        error: "Inget kort att radera",
       });
     }
   } catch (error) {
@@ -87,7 +87,7 @@ app.patch("/playerCards/:id", async (req, res) => {
     );
     await fs.writeFile("./playerCards.json", JSON.stringify(updatedList));
     res.send({
-      message: `Uppgift med id ${id} uppdaterad`,
+      message: `Kortet med id ${id} uppdaterad`,
     });
   } catch (error) {
     res.status(500).send({
