@@ -5,20 +5,24 @@ playerCardForm.jerseynumber.addEventListener('blur', (e) => validateField(e.targ
 playerCardForm.playerTeam.addEventListener('input', (e) => validateField(e.target));
 playerCardForm.playerTeam.addEventListener('blur', (e) => validateField(e.target));
 playerCardForm.addEventListener('submit', onSubmit);
+
 const hockeyCardsElement = document.getElementById('hockeyCards');
-let nameValid = true;
-let jerseynumberValid = true;
-let playerTeamValid = true;
-const api = new Api('http://localhost:5678/playerCards');
 
 const wrapper = `
     <div class="pile left-pile"></div>
     <div class="pile right-pile"></div>
 `;
 
-const hcDiv = document.querySelector('.hockeyCards');
+console.log('what is this' + hockeyCardsElement);
 
-hcDiv.innerHTML += wrapper;
+hockeyCardsElement.innerHTML += wrapper
+
+let nameValid = true;
+let jerseynumberValid = true;
+let playerTeamValid = true;
+
+
+const api = new Api('http://localhost:5678/playerCards');
 
 function validateField(field) {
   const { name, value } = field;
@@ -84,11 +88,13 @@ function saveCard() {
   });
 }
 
+
+
 renderList = async () => {
   console.log('rendering');
   try {
     const playerCards = await api.getAll();
-    hockeyCardsElement.innerHTML = '';
+    // hockeyCardsElement.innerHTML = '';
     if (playerCards && playerCards.length > 0) {
       // playerCards.sort((a, b) => {
       //   if (a.viewed && !b.viewed) {
@@ -114,7 +120,7 @@ renderList = async () => {
   }
 };
 
-function renderplayerCard({ id, name, jerseynumber, playerTeam, viewed }) {
+function renderplayerCard({ id, name, jerseynumber, playerTeam }) {
   let html = `
       <div class="card" style="
         top: ${id * 10}px;
@@ -125,13 +131,7 @@ function renderplayerCard({ id, name, jerseynumber, playerTeam, viewed }) {
           <img src="./gifs/3.gif" alt="card" />
           <h2>${name}</h2>
           <p>${playerTeam}</p>
-        </div>
-        <div class="select-none mt-2 p-3 ${completed ? 'bg-green-500' : 'bg-red-500'} border-[0.25rem] border-black hover:bg-blue-500">
-          <input type="checkbox" ${
-            completed ? 'checked' : ''
-          } onclick="updateplayerCard(${id}) "id="checkBox${id}" class="appearance-none border-[0.25rem] border-black bg-red-500 checked:bg-green-500 hover:bg-yellow-500"/>
-          <button onclick="deleteplayerCard(${id})" class="inline-block bg-gray-300 text-md text-slate-900 border-[0.25rem] border-black px-3 py-1 ml-2 hover:bg-white">Ta bort</button>
-        </div>
+        </div>       
     </div>`;
   jerseynumber &&
     (html += `
