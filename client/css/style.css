@@ -73,7 +73,7 @@ p {
     font-weight: bold;
     text-transform: uppercase;
     padding: 0.5em .5em .5em;
-    letter-spacing: 0.1em;
+
 }
 
 .card-number {
@@ -91,10 +91,14 @@ p {
     width: 100%;
     top: 0;
     left: 0;
+    letter-spacing: 0.2em;
+    padding-left: 1em;
 }
 
 .card-team {
     width: 100%;
     bottom: 0;
     left: 0;
+    letter-spacing: 0.2em;
+    padding-left: 1em;
 }

@@ -129,11 +129,11 @@ function renderplayerCard({ id, name, jerseynumber, playerTeam }) {
 
   let teamBgColor;
   if (playerTeam === 'Systemvetenskap') {
-    teamBgColor = 'hsla(250, 50%, 50%, 0.75)';
+    teamBgColor = 'hsla(250, 50%, 50%, 0.85)';
   } else if (playerTeam === 'Informationsdesign') {
-    teamBgColor = 'hsla(0, 50%, 50%, 0.75)';
+    teamBgColor = 'hsla(0, 50%, 50%, 0.85)';
   } else {
-    teamBgColor = 'hsla(50, 50%, 50%, 0.75)';
+    teamBgColor = 'hsla(50, 50%, 50%, 0.85)';
   }
 
   let html = `
@@ -144,7 +144,7 @@ function renderplayerCard({ id, name, jerseynumber, playerTeam }) {
         <span class="card-number">${jerseynumber}</span>
         <span class="card-team" style="background: ${teamBgColor};">${playerTeam}</span>
           <img src="./gifs/${imgSrc}.gif" alt="card" />
-          <button onclick="deleteplayerCard(${id})" class="w-fit bg-gray-300 hover:bg-gray-400 hover:translate-y-px px-4 py-2 rounded-lg shadow-md">Radera kortet!</button> 
+          <button onclick="deleteplayerCard(${id})" class="w-fit bg-red-600 hover:bg-red-700 hover:translate-y-px px-4 py-2 rounded-lg shadow-md">Radera kortet!</button> 
     </div>`;
 
   return html;
