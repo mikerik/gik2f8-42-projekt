@@ -15,44 +15,39 @@
       <section class="flex gap-10 w-full xl:w-4/5 mx-2 xl:mx-auto bg-white bg-opacity-75 p-5">
         <section class="flex-1">
           <h2 class="mb-6 text-3xl text-black">Lägg till en uppgift</h2>
-          <form id="todoForm" name="todoForm">
+          <form id="playerCardForm" name="playerCardForm">
             <section class="mb-2">
-              <label class="block pr-5 mb-2 text-xl" for="title">Name</label>
+              <label class="block pr-5 mb-2 text-xl" for="name">Name</label>
               <p class="message text-sm text-red-700 mb-2 hidden">Error message</p>
-              <input
-                type="text"
-                id="title"
-                name="title"
-                class="w-full border-black border-[0.25rem] focus-within:outline-none focus:border-gray-600 px-4 py-2"
-              />
+              <input type="text" id="name" name="name" class="w-full border-black border-[0.25rem] focus-within:outline-none focus:border-gray-600 px-4 py-2" />
             </section>
             <section class="mb-2">
-              <label class="block pr-5 mb-2 text-xl" for="description">Beskrivning</label>
+              <label class="block pr-5 mb-2 text-xl" for="jerseynumber">Beskrivning</label>
               <p class="message text-sm text-red-700 mb-2 hidden">Error message</p>
               <textarea
                 maxlength="500"
                 rows="5"
-                id="description"
-                name="description"
+                id="jerseynumber"
+                name="jerseynumber"
                 class="resize-none w-full border-black border-[0.25rem] focus-within:outline-none focus:border-gray-600 px-4 py-2"
               ></textarea>
             </section>
             <section class="mb-2">
-              <label class="block pr-5 mb-2 text-xl" for="title">Utförd senast</label>
+              <label class="block pr-5 mb-2 text-xl" for="name">Utförd senast</label>
               <p class="message text-sm text-red-700 mb-2 hidden">Error message</p>
               <input
                 type="date"
-                id="dueDate"
-                name="dueDate"
+                id="playerTeam"
+                name="playerTeam"
                 class="w-full border-black border-[0.25rem] focus-within:outline-none focus:border-gray-600 px-4 py-2"
               />
             </section>
-            <button name="submitTodoForm" class="border-black border-[0.25rem] bg-gray-300 hover:bg-white px-4 py-1" type="submit">Spara</button>
+            <button name="submitCardForm" class="border-black border-[0.25rem] bg-gray-300 hover:bg-white px-4 py-1" type="submit">Spara</button>
           </form>
         </section>
         <section class="playerlist flex-1 px-5">
           <h2 class="mb-6 text-3xl text-black">Alla spelare</h2>
-          <ul id="todoList">
+          <ul id="hockeyCards">
             <li>
               <div class="card">
                 <div class="front">

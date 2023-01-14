@@ -34,7 +34,7 @@ class Api {
   };
 
   remove = async (id) => {
-    console.log(`Removing task with id ${id}`);
+    console.log(`Removing playerCard with id ${id}`);
     try {
       const result = await fetch(`${this.url}/${id}`, {
         method: "DELETE",

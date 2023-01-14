@@ -14,9 +14,12 @@ const numDivs = 8;
 
 for (let i = 0; i < numDivs; i++) {
   const div = `
-    <div class="card" style="top: ${i * 10}px; left: ${i * 10}px;">
+    <div class="card" style="top: ${i * 10}px; left: ${i * 10}px; background-color: rgb(${i + 10 * 2}0, ${i + 5 * 3}0, ${i + 5 * 4}0">
+      <div class="card-number">${i + 1}</div>
         <div class="card-img">
-            <img src="./gifs/${i + 1}.gif" alt="card" />
+          <img src="./gifs/${i + 1}.gif" alt="card" />
+          <h2>playername ${i}</h2>
+          <p>Contents of card ${i}</p>
         </div>
     </div>
   `;

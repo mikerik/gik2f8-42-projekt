@@ -14,23 +14,23 @@
       <section class="grid grid-cols-2 border-[0.5rem] border-green-400 gap-1">
         <section class="bg-red-100 border-[0.25rem] border-pink-300">
           <h2>Lägg till en uppgift</h2>
-          <form id="todoForm" name="todoForm">
+          <form id="playerCardForm" name="playerCardForm">
             <section>
-              <label for="title">Name</label>
+              <label for="name">Name</label>
               <p class="message text-sm text-red-700 mb-2 hidden">Error message</p>
-              <input type="text" id="title" name="title" />
+              <input type="text" id="name" name="name" />
             </section>
             <section>
-              <label for="description">Beskrivning</label>
+              <label for="jerseynumber">Beskrivning</label>
               <p class="message text-sm text-red-700 mb-2 hidden">Error message</p>
-              <textarea maxlength="500" rows="5" id="description" name="description" class="resize-none"></textarea>
+              <textarea maxlength="500" rows="5" id="jerseynumber" name="jerseynumber" class="resize-none"></textarea>
             </section>
             <section>
-              <label for="title">Utförd senast</label>
+              <label for="name">Utförd senast</label>
               <p class="message text-sm text-red-700 mb-2 hidden">Error message</p>
-              <input type="date" id="dueDate" name="dueDate" />
+              <input type="date" id="playerTeam" name="playerTeam" />
             </section>
-            <button name="submitTodoForm" type="submit">Spara</button>
+            <button name="submitCardForm" type="submit">Spara</button>
           </form>
         </section>
         <section class="bg-green-100 playerlist border-[0.25rem] border-pink-300 grid grid-cols-4 place-content-evenly place-items-center">

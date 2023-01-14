@@ -15,52 +15,52 @@ app
     res.header("Access-Control-Allow-Methods", "*");
     next();
   });
-app.get("/tasks", async (req, res) => {
+app.get("/playerCards", async (req, res) => {
   try {
-    const tasks = await fs.readFile("./tasks.json");
-    res.send(JSON.parse(tasks));
+    const playerCards = await fs.readFile("./playerCards.json");
+    res.send(JSON.parse(playerCards));
   } catch (error) {
     res.status(500).send({
       error: error.stack,
     });
   }
 });
-app.post("/tasks", async (req, res) => {
+app.post("/playerCards", async (req, res) => {
   try {
-    const task = req.body;
-    const listBuffer = await fs.readFile("./tasks.json");
-    const currentTasks = JSON.parse(listBuffer);
-    let maxTaskId = 1;
-    if (currentTasks && currentTasks.length > 0) {
-      maxTaskId = currentTasks.reduce(
+    const playerCard = req.body;
+    const listBuffer = await fs.readFile("./playerCards.json");
+    const currentplayerCards = JSON.parse(listBuffer);
+    let maxplayerCardId = 1;
+    if (currentplayerCards && currentplayerCards.length > 0) {
+      maxplayerCardId = currentplayerCards.reduce(
         (maxId, currentElement) =>
           currentElement.id > maxId ? currentElement.id : maxId,
-        maxTaskId
+        maxplayerCardId
       );
     }
-    const newTask = {
-      id: maxTaskId + 1,
-      ...task,
+    const newplayerCard = {
+      id: maxplayerCardId + 1,
+      ...playerCard,
     };
-    const newList = currentTasks ? [...currentTasks, newTask] : [newTask];
-    await fs.writeFile("./tasks.json", JSON.stringify(newList));
-    res.send(newTask);
+    const newList = currentplayerCards ? [...currentplayerCards, newplayerCard] : [newplayerCard];
+    await fs.writeFile("./playerCards.json", JSON.stringify(newList));
+    res.send(newplayerCard);
   } catch (error) {
     res.status(500).send({
       error: error.stack,
     });
   }
 });
-app.delete("/tasks/:id", async (req, res) => {
+app.delete("/playerCards/:id", async (req, res) => {
   console.log(req);
   try {
     const id = req.params.id;
-    const listBuffer = await fs.readFile("./tasks.json");
-    const currentTasks = JSON.parse(listBuffer);
-    if (currentTasks.length > 0) {
+    const listBuffer = await fs.readFile("./playerCards.json");
+    const currentplayerCards = JSON.parse(listBuffer);
+    if (currentplayerCards.length > 0) {
       await fs.writeFile(
-        "./tasks.json",
-        JSON.stringify(currentTasks.filter((task) => task.id != id))
+        "./playerCards.json",
+        JSON.stringify(currentplayerCards.filter((playerCard) => playerCard.id != id))
       );
       res.send({
         message: `Uppgift med id ${id} togs bort`,
@@ -76,16 +76,16 @@ app.delete("/tasks/:id", async (req, res) => {
     });
   }
 });
-app.patch("/tasks/:id", async (req, res) => {
+app.patch("/playerCards/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const updatedData = req.body;
-    const listBuffer = await fs.readFile("./tasks.json");
-    const currentTasks = JSON.parse(listBuffer);
-    const updatedList = currentTasks.map((task) =>
-      task.id == id ? { ...task, ...updatedData } : task
+    const listBuffer = await fs.readFile("./playerCards.json");
+    const currentplayerCards = JSON.parse(listBuffer);
+    const updatedList = currentplayerCards.map((playerCard) =>
+      playerCard.id == id ? { ...playerCard, ...updatedData } : playerCard
     );
-    await fs.writeFile("./tasks.json", JSON.stringify(updatedList));
+    await fs.writeFile("./playerCards.json", JSON.stringify(updatedList));
     res.send({
       message: `Uppgift med id ${id} uppdaterad`,
     });

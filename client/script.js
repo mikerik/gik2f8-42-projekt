@@ -1,102 +1,103 @@
-todoForm.title.addEventListener("keyup", (e) => validateField(e.target));
-todoForm.title.addEventListener("blur", (e) => validateField(e.target));
-todoForm.description.addEventListener("input", (e) => validateField(e.target));
-todoForm.description.addEventListener("blur", (e) => validateField(e.target));
-todoForm.dueDate.addEventListener("input", (e) => validateField(e.target));
-todoForm.dueDate.addEventListener("blur", (e) => validateField(e.target));
-todoForm.addEventListener("submit", onSubmit);
-const todoListElement = document.getElementById("todoList");
-let titleValid = true;
-let descriptionValid = true;
-let dueDateValid = true;
-const api = new Api("http://localhost:5678/tasks");
+playerCardForm.name.addEventListener('keyup', (e) => validateField(e.target));
+playerCardForm.name.addEventListener('blur', (e) => validateField(e.target));
+playerCardForm.jerseynumber.addEventListener('input', (e) => validateField(e.target));
+playerCardForm.jerseynumber.addEventListener('blur', (e) => validateField(e.target));
+playerCardForm.playerTeam.addEventListener('input', (e) => validateField(e.target));
+playerCardForm.playerTeam.addEventListener('blur', (e) => validateField(e.target));
+playerCardForm.addEventListener('submit', onSubmit);
+const hockeyCardsElement = document.getElementById('hockeyCards');
+let nameValid = true;
+let jerseynumberValid = true;
+let playerTeamValid = true;
+const api = new Api('http://localhost:5678/playerCards');
 
 function validateField(field) {
   const { name, value } = field;
-  let = validationMessage = "";
+  let = validationMessage = '';
   switch (name) {
-    case "title": {
+    case 'name': {
       if (value.length < 2) {
-        titleValid = false;
-        validationMessage = "The field 'Titel' need atleast 2 characters.";
-      } else if (value.length > 100) {
-        titleValid = false;
-        validationMessage =
-          "The field 'Titel' can only contain of maximum 100 characters.";
+        nameValid = false;
+        validationMessage = 'Spelarens namn måste vara minst fyra tecken.';
+      } else if (value.length > 70) {
+        nameValid = false;
+        validationMessage = 'Spelarens namn får inte vara längre än 70 tecken.';
       } else {
-        titleValid = true;
+        nameValid = true;
       }
       break;
     }
-    case "description": {
-      if (value.length > 500) {
-        descriptionValid = false;
-        validationMessage =
-          "The field 'Description' can only contain a maximum of 500 characters.";
+    case 'jerseynumber': {
+      if (value.length < 1) {
+        jerseynumberValid = false;
+        validationMessage = 'Spelarens tröjnummer måste vara mellan 1-99.';
+      } else if (value.length > 2) {
+        jerseynumberValid = false;
+        validationMessage = 'Spelarens tröjnummer måste vara mellan 1-99.';
       } else {
-        descriptionValid = true;
+        jerseynumberValid = true;
       }
       break;
     }
-    case "dueDate": {
+    case 'playerTeam': {
       if (value.length === 0) {
-        dueDateValid = false;
-        validationMessage = "The field 'Due date' needs a valid due date.";
+        playerTeamValid = false;
+        validationMessage = 'Felaktigt lag valt, laget existerar inte.';
       } else {
-        dueDateValid = true;
+        playerTeamValid = true;
       }
       break;
     }
   }
   field.previousElementSibling.innerText = validationMessage;
-  field.previousElementSibling.classList.remove("hidden");
+  field.previousElementSibling.classList.remove('hidden');
 }
 
 function onSubmit(e) {
   e.preventDefault();
-  if (titleValid && descriptionValid && dueDateValid) {
-    console.log("Submit");
-    saveTask();
+  if (nameValid && jerseynumberValid && playerTeamValid) {
+    console.log('Submit');
+    saveCard();
   }
 }
 
-function saveTask() {
-  const task = {
-    title: todoForm.title.value,
-    description: todoForm.description.value,
-    dueDate: todoForm.dueDate.value,
+function saveCard() {
+  const playerCard = {
+    name: playerCardForm.name.value,
+    jerseynumber: playerCardForm.jerseynumber.value,
+    playerTeam: playerCardForm.playerTeam.value,
     completed: false,
   };
-  api.create(task).then((task) => {
-    if (task) {
+  api.create(playerCard).then((playerCard) => {
+    if (playerCard) {
       renderList();
     }
   });
 }
 
 renderList = async () => {
-  console.log("rendering");
+  console.log('rendering');
   try {
-    const tasks = await api.getAll();
-    todoListElement.innerHTML = "";
-    if (tasks && tasks.length > 0) {
-      tasks.sort((a, b) => {
+    const playerCards = await api.getAll();
+    hockeyCardsElement.innerHTML = '';
+    if (playerCards && playerCards.length > 0) {
+      playerCards.sort((a, b) => {
         if (a.completed && !b.completed) {
           return 1;
         }
         if (!a.completed && b.completed) {
           return -1;
         }
-        if (a.dueDate < b.dueDate) {
+        if (a.playerTeam < b.playerTeam) {
           return -1;
         }
-        if (a.dueDate > b.dueDate) {
+        if (a.playerTeam > b.playerTeam) {
           return 1;
         }
         return 0;
       });
-      tasks.forEach((task) => {
-        todoListElement.insertAdjacentHTML("beforeend", renderTask(task));
+      playerCards.forEach((playerCard) => {
+        hockeyCardsElement.insertAdjacentHTML('beforeend', renderplayerCard(playerCard));
       });
     }
   } catch (err) {
@@ -104,16 +105,14 @@ renderList = async () => {
   }
 };
 
-function renderTask({ id, title, description, dueDate, completed }) {
+function renderplayerCard({ id, name, jerseynumber, playerTeam, completed }) {
   let html = `
-    <li class="select-none mt-2 p-3 ${
-      completed ? "bg-green-500" : "bg-red-500"
-    } border-[0.25rem] border-black hover:bg-blue-500">
+    <li class="select-none mt-2 p-3 ${completed ? 'bg-green-500' : 'bg-red-500'} border-[0.25rem] border-black hover:bg-blue-500">
       <div class="flex items-center">
         <div id="inputContainer${id}">
           <input type="checkbox" ${
-            completed ? "checked" : ""
-          } onclick="updateTask(${id}) "id="checkBox${id}" class="appearance-none border-[0.25rem] border-black bg-red-500 checked:bg-green-500 hover:bg-yellow-500"/>
+            completed ? 'checked' : ''
+          } onclick="updateplayerCard(${id}) "id="checkBox${id}" class="appearance-none border-[0.25rem] border-black bg-red-500 checked:bg-green-500 hover:bg-yellow-500"/>
           <style>
             input[type="checkbox"]:checked:before{
               content: "✔";
@@ -125,22 +124,22 @@ function renderTask({ id, title, description, dueDate, completed }) {
             }
           </style>
         </div> 
-        <h3 class="pl-4 mb-3 flex-1 text-xl font-bold text-black">${title}</h3>
+        <h3 class="pl-4 mb-3 flex-1 text-xl font-bold text-black">${name}</h3>
         <div>
-          <span><b>Deadline: ${dueDate}</b></span>
-          <button onclick="deleteTask(${id})" class="inline-block bg-gray-300 text-md text-slate-900 border-[0.25rem] border-black px-3 py-1 ml-2 hover:bg-white">Ta bort</button>
+          <span><b>Deadline: ${playerTeam}</b></span>
+          <button onclick="deleteplayerCard(${id})" class="inline-block bg-gray-300 text-md text-slate-900 border-[0.25rem] border-black px-3 py-1 ml-2 hover:bg-white">Ta bort</button>
         </div>
       </div>`;
-  description &&
+  jerseynumber &&
     (html += `
-      <p class="ml-8 mt-2 text-md italic">${description}</p>
+      <p class="ml-8 mt-2 text-md italic">${jerseynumber}</p>
   `);
   html += `
     </li>`;
   return html;
 }
 
-deleteTask = async (id) => {
+deleteplayerCard = async (id) => {
   try {
     await api.remove(id);
     renderList();
@@ -149,7 +148,7 @@ deleteTask = async (id) => {
   }
 };
 
-updateTask = async (id) => {
+updateplayerCard = async (id) => {
   const checkBox = document.getElementById(`checkBox${id}`);
   let data;
   if (checkBox.checked) {
