@@ -1,8 +1,1 @@
-[
-  { "id": 5, "name": "Jeanette Bergström", "jerseynumber": "9", "playerTeam": "Systemvetenskapliga programmet", "completed": true },
-  { "id": 8, "name": "Bob Probert", "jerseynumber": "24", "playerTeam": "IT-säkerhet och mjukvarutestning", "completed": true },
-  { "id": 9, "name": "Wayne Gretzky", "jerseynumber": "99", "playerTeam": "Informationsdesign", "completed": true },
-  { "id": 10, "name": "Mikael Eriksson", "jerseynumber": "20", "playerTeam": "Systemvetenskapliga programmet", "completed": false },
-  { "id": 11, "name": "Peter Forsberg", "jerseynumber": "21", "playerTeam": "IT-säkerhet och mjukvarutestning", "completed": false },
-  { "id": 12, "name": "Dominik Hasek", "jerseynumber": "39", "playerTeam": "Informationsdesign", "completed": false }
-]
+[{"id":5,"name":"Jeanette Bergström","jerseynumber":"9","playerTeam":"Systemvetenskapliga programmet","viewed":true},{"id":8,"name":"Bob Probert","jerseynumber":"24","playerTeam":"IT-säkerhet och mjukvarutestning","viewed":true},{"id":9,"name":"Wayne Gretzky","jerseynumber":"99","playerTeam":"Informationsdesign","viewed":true},{"id":10,"name":"Mikael Eriksson","jerseynumber":"20","playerTeam":"Systemvetenskapliga programmet","viewed":false},{"id":11,"name":"Peter Forsberg","jerseynumber":"21","playerTeam":"IT-säkerhet och mjukvarutestning","viewed":false},{"id":12,"name":"Dominik Hasek","jerseynumber":"39","playerTeam":"Informationsdesign","viewed":false},{"id":13,"name":"Mikael Eriksson","jerseynumber":"21","playerTeam":"Systemvetenskapliga programmet","viewed":false},{"id":14,"name":"","jerseynumber":"","playerTeam":"Systemvetenskapliga programmet","viewed":false},{"id":15,"name":"","jerseynumber":"","playerTeam":"Systemvetenskapliga programmet","viewed":false}]

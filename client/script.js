@@ -11,6 +11,15 @@ let jerseynumberValid = true;
 let playerTeamValid = true;
 const api = new Api('http://localhost:5678/playerCards');
 
+const wrapper = `
+    <div class="pile left-pile"></div>
+    <div class="pile right-pile"></div>
+`;
+
+const hcDiv = document.querySelector('.hockeyCards');
+
+hcDiv.innerHTML += wrapper;
+
 function validateField(field) {
   const { name, value } = field;
   let = validationMessage = '';
@@ -66,7 +75,7 @@ function saveCard() {
     name: playerCardForm.name.value,
     jerseynumber: playerCardForm.jerseynumber.value,
     playerTeam: playerCardForm.playerTeam.value,
-    completed: false,
+    viewed: false,
   };
   api.create(playerCard).then((playerCard) => {
     if (playerCard) {
@@ -81,21 +90,21 @@ renderList = async () => {
     const playerCards = await api.getAll();
     hockeyCardsElement.innerHTML = '';
     if (playerCards && playerCards.length > 0) {
-      playerCards.sort((a, b) => {
-        if (a.completed && !b.completed) {
-          return 1;
-        }
-        if (!a.completed && b.completed) {
-          return -1;
-        }
-        if (a.playerTeam < b.playerTeam) {
-          return -1;
-        }
-        if (a.playerTeam > b.playerTeam) {
-          return 1;
-        }
-        return 0;
-      });
+      // playerCards.sort((a, b) => {
+      //   if (a.viewed && !b.viewed) {
+      //     return 1;
+      //   }
+      //   if (!a.viewed && b.viewed) {
+      //     return -1;
+      //   }
+      //   if (a.playerTeam < b.playerTeam) {
+      //     return -1;
+      //   }
+      //   if (a.playerTeam > b.playerTeam) {
+      //     return 1;
+      //   }
+      //   return 0;
+      // });
       playerCards.forEach((playerCard) => {
         hockeyCardsElement.insertAdjacentHTML('beforeend', renderplayerCard(playerCard));
       });
@@ -105,39 +114,61 @@ renderList = async () => {
   }
 };
 
-function renderplayerCard({ id, name, jerseynumber, playerTeam, completed }) {
+function renderplayerCard({ id, name, jerseynumber, playerTeam, viewed }) {
   let html = `
-    <li class="select-none mt-2 p-3 ${completed ? 'bg-green-500' : 'bg-red-500'} border-[0.25rem] border-black hover:bg-blue-500">
-      <div class="flex items-center">
-        <div id="inputContainer${id}">
+      <div class="card" style="
+        top: ${id * 10}px;
+        left: ${id * 10}px;
+        background-color: rgb(${id + 10 * 2}0, ${id + 5 * 3}0, ${id + 5 * 4}0">
+      <div class="card-number">${jerseynumber}</div>
+        <div class="card-img">
+          <img src="./gifs/3.gif" alt="card" />
+          <h2>${name}</h2>
+          <p>${playerTeam}</p>
+        </div>
+        <div class="select-none mt-2 p-3 ${completed ? 'bg-green-500' : 'bg-red-500'} border-[0.25rem] border-black hover:bg-blue-500">
           <input type="checkbox" ${
             completed ? 'checked' : ''
           } onclick="updateplayerCard(${id}) "id="checkBox${id}" class="appearance-none border-[0.25rem] border-black bg-red-500 checked:bg-green-500 hover:bg-yellow-500"/>
-          <style>
-            input[type="checkbox"]:checked:before{
-              content: "✔";
-              font-size: 12px;
-            }
-            input[type="checkbox"]:before{
-              content: "✖";
-              font-size: 12px;
-            }
-          </style>
-        </div> 
-        <h3 class="pl-4 mb-3 flex-1 text-xl font-bold text-black">${name}</h3>
-        <div>
-          <span><b>Deadline: ${playerTeam}</b></span>
           <button onclick="deleteplayerCard(${id})" class="inline-block bg-gray-300 text-md text-slate-900 border-[0.25rem] border-black px-3 py-1 ml-2 hover:bg-white">Ta bort</button>
         </div>
-      </div>`;
+    </div>`;
   jerseynumber &&
     (html += `
       <p class="ml-8 mt-2 text-md italic">${jerseynumber}</p>
   `);
-  html += `
-    </li>`;
   return html;
 }
+
+document.addEventListener('click', (event) => {
+  const target = event.target;
+  if (target.classList.contains('card')) {
+    const card = target;
+    const pile = card.parentElement;
+    const otherPile = pile.classList.contains('left-pile') ? rightPile : leftPile;
+
+    // Remove the card from the current pile
+    pile.removeChild(card);
+
+    // Update the styles of the remaining cards in the current pile
+    for (let i = 0; i < pile.children.length; i++) {
+      pile.children[i].style.top = `${i * 10}px`;
+      pile.children[i].style.left = `${i * 10}px`;
+      pile.children[i].style.zIndex = `${i + 1}`;
+    }
+
+    // Add the card to the other pile
+    card.style.zIndex = otherPile.children.length + 1;
+    otherPile.appendChild(card);
+
+    // Update the styles of the cards in the other pile
+    for (let i = 0; i < otherPile.children.length; i++) {
+      otherPile.children[i].style.top = `${i * 10}px`;
+      otherPile.children[i].style.left = `${i * 10}px`;
+      otherPile.children[i].style.zIndex = `${i + 1}`;
+    }
+  }
+});
 
 deleteplayerCard = async (id) => {
   try {
@@ -153,11 +184,11 @@ updateplayerCard = async (id) => {
   let data;
   if (checkBox.checked) {
     data = {
-      completed: true,
+      viewed: true,
     };
   } else {
     data = {
-      completed: false,
+      viewed: false,
     };
   }
   try {
