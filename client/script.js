@@ -94,23 +94,8 @@ renderList = async () => {
   console.log('rendering');
   try {
     const playerCards = await api.getAll();
-    // hockeyCardsElement.innerHTML = '';
+    hockeyCardsElement.innerHTML = '';
     if (playerCards && playerCards.length > 0) {
-      // playerCards.sort((a, b) => {
-      //   if (a.viewed && !b.viewed) {
-      //     return 1;
-      //   }
-      //   if (!a.viewed && b.viewed) {
-      //     return -1;
-      //   }
-      //   if (a.playerTeam < b.playerTeam) {
-      //     return -1;
-      //   }
-      //   if (a.playerTeam > b.playerTeam) {
-      //     return 1;
-      //   }
-      //   return 0;
-      // });
       playerCards.forEach((playerCard) => {
         hockeyCardsElement.insertAdjacentHTML('beforeend', renderplayerCard(playerCard));
       });
