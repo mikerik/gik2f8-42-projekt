@@ -8,13 +8,6 @@ playerCardForm.addEventListener('submit', onSubmit);
 
 const hockeyCardsElement = document.getElementById('hockeyCards');
 
-// const wrapper = `
-//     <div class="pile left-pile"></div>
-//     <div class="pile right-pile"></div>
-// `;
-
-// hockeyCardsElement.innerHTML += wrapper
-
 let nameValid = true;
 let jerseynumberValid = true;
 let playerTeamValid = true;

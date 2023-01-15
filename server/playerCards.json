@@ -1,11 +1,5 @@
 [
   { "id": 1, "name": "Bobby Orr", "jerseynumber": "4", "playerTeam": "Informationsdesign" },
   { "id": 2, "name": "Gordie Howe", "jerseynumber": "9", "playerTeam": "IT-säkerhet" },
-  { "id": 3, "name": "Mikael Eriksson", "jerseynumber": "20", "playerTeam": "Systemvetenskap" },
-  { "id": 4, "name": "Dominik Hasek", "jerseynumber": "39", "playerTeam": "IT-säkerhet" },
-  { "id": 5, "name": "Albert Einstein", "jerseynumber": "55", "playerTeam": "Informationsdesign" },
-  { "id": 6, "name": "Mario Lemieux", "jerseynumber": "66", "playerTeam": "IT-säkerhet" },
-  { "id": 7, "name": "Bosse Bildoktorn", "jerseynumber": "69", "playerTeam": "Systemvetenskap" },
-  { "id": 8, "name": "Paul Coffey", "jerseynumber": "77", "playerTeam": "Systemvetenskap" },
-  { "id": 9, "name": "Wayne Gretzky", "jerseynumber": "99", "playerTeam": "Informationsdesign" }
+  { "id": 3, "name": "Mats Sundin", "jerseynumber": "13", "playerTeam": "Systemvetenskap" }
 ]
